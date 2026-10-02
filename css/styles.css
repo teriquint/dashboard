@@ -130,6 +130,16 @@ main > h1 {
     margin-bottom: var(--space-xl);
 }
 
+/* ==========================
+   5. HEADER
+   ========================== */
+
+header {
+    padding: var(--space-xl);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+}
 
 /* ==========================
    5. DASHBOARD
