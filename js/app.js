@@ -27,6 +27,58 @@ function displayWeatherError() {
     `;
 }
 
+let allQuotes = [];
+let lastQuoteIndex = -1;
+
+const newQuoteButton = document.getElementById('new-quote');
+
+function displayRandomQuote() {
+    if (allQuotes.length === 0) {
+        document.getElementById('quote-display').innerHTML = `
+            <p>There are no quotes to show.</p>
+        `;
+        return;
+    }
+
+    let randomIndex;
+
+    do {
+        randomIndex = Math.floor(Math.random() * allQuotes.length);
+    } while (randomIndex === lastQuoteIndex && allQuotes.length > 1);
+
+    lastQuoteIndex = randomIndex;
+
+    const quote = allQuotes[randomIndex];
+
+    document.getElementById('quote-display').innerHTML = `
+        <p>"${quote.text}"</p>
+        <p>— ${quote.author}</p>
+    `;
+}
+
+function loadQuotes() {
+    fetch('./data/quotes.json')
+        .then(response => response.json())
+        .then(quotes => {
+            allQuotes = quotes;
+            displayRandomQuote();
+
+            if (allQuotes.length > 0) {
+                newQuoteButton.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Error loading quotes:', error);
+            displayQuotesError();
+        });
+}
+
+function displayQuotesError() {
+    document.getElementById('quote-display').innerHTML = `
+        <p>Quote data is unavailable right now.</p>
+    `;
+}
+
 function initializeTheme() {
     if (localStorage.getItem('dashboardTheme') === 'dark') {
         document.body.classList.add('theme-dark');
@@ -44,6 +96,8 @@ function toggleTheme() {
 }
 
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+newQuoteButton.addEventListener('click', displayRandomQuote);
 
 initializeTheme();
 loadWeather();
+loadQuotes();

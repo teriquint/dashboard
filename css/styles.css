@@ -142,6 +142,10 @@ button:focus-visible {
     outline-offset: 2px;
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 /* ==========================
    4. LAYOUT

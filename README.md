@@ -2,7 +2,7 @@
 
 A personal data dashboard created for Project 3 in WRIT 40363. The dashboard loads weather information from a JSON file and displays it using JavaScript and the Fetch API.
 
-**Live site:** [Add GitHub Pages URL after deployment]
+**Live site:** https://teriquint.github.io/dashboard/
 
 ## Built with
 
