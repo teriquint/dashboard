@@ -1,26 +1,27 @@
 # Personal Data Dashboard
 
-## About
+A personal data dashboard created for Project 3 in WRIT 40363. The dashboard loads weather information from a JSON file and displays it using JavaScript and the Fetch API.
 
-This project is a personal data dashboard created for Project 3 in WRIT 40363. It uses HTML, CSS, JavaScript, JSON, and the Fetch API to load and display weather data.
+**Live site:** [Add GitHub Pages URL after deployment]
+
+## Built with
+
+- HTML
+- CSS with design tokens and responsive styling
+- JavaScript
+- JSON
+- Fetch API
+- localStorage
+- Git and GitHub Pages
 
 ## Features
 
 - Loads weather data from a JSON file using fetch()
 - Displays temperature, location, weather condition, humidity, and wind speed
-- Includes a light and dark theme toggle
-- Saves the user's theme preference using localStorage
-- Includes responsive styling for different screen sizes
+- Includes light and dark themes
+- Saves the user's theme preference so it remains after the page is refreshed
+- Adjusts to different screen sizes
 
-## Technologies
+## Notes
 
-- HTML
-- CSS
-- JavaScript
-- JSON
-- Fetch API
-- localStorage
-
-## Live Site
-
-The live site will be available through GitHub Pages.
+The light and dark themes use the same role-named CSS design tokens with different color values. The theme preference is saved with localStorage so the dashboard remembers the reader's choice when the page is reopened.
