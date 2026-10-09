@@ -1,6 +1,10 @@
+
 function loadWeather() {
     fetch('./data/weather.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('Data could not be loaded');
+            return response.json();
+        })
         .then(data => displayWeather(data))
         .catch(error => {
             console.error('Error loading weather:', error);
@@ -9,6 +13,8 @@ function loadWeather() {
 }
 
 function displayWeather(weather) {
+    document.getElementById('weather-display').classList.remove('loading');
+
     document.getElementById('weather-display').innerHTML = `
         <div class="weather-current">
             <div class="weather-icon">${weather.icon}</div>
@@ -22,6 +28,8 @@ function displayWeather(weather) {
 }
 
 function displayWeatherError() {
+    document.getElementById('weather-display').classList.remove('loading');
+
     document.getElementById('weather-display').innerHTML = `
         <p>Weather data is unavailable right now.</p>
     `;
@@ -33,6 +41,8 @@ let lastQuoteIndex = -1;
 const newQuoteButton = document.getElementById('new-quote');
 
 function displayRandomQuote() {
+    document.getElementById('quote-display').classList.remove('loading');
+
     if (allQuotes.length === 0) {
         document.getElementById('quote-display').innerHTML = `
             <p>There are no quotes to show.</p>
@@ -58,7 +68,10 @@ function displayRandomQuote() {
 
 function loadQuotes() {
     fetch('./data/quotes.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('Data could not be loaded');
+            return response.json();
+        })
         .then(quotes => {
             allQuotes = quotes;
             displayRandomQuote();
@@ -74,6 +87,8 @@ function loadQuotes() {
 }
 
 function displayQuotesError() {
+    document.getElementById('quote-display').classList.remove('loading');
+
     document.getElementById('quote-display').innerHTML = `
         <p>Quote data is unavailable right now.</p>
     `;
@@ -83,6 +98,19 @@ function initializeTheme() {
     if (localStorage.getItem('dashboardTheme') === 'dark') {
         document.body.classList.add('theme-dark');
     }
+
+    updateThemeButton();
+}
+
+function updateThemeButton() {
+    const isDark = document.body.classList.contains('theme-dark');
+    const button = document.getElementById('theme-toggle');
+
+    button.textContent = isDark
+        ? 'Switch to light mode'
+        : 'Switch to dark mode';
+
+    button.setAttribute('aria-pressed', String(isDark));
 }
 
 function toggleTheme() {
@@ -93,6 +121,8 @@ function toggleTheme() {
     } else {
         localStorage.setItem('dashboardTheme', 'light');
     }
+
+    updateThemeButton();
 }
 
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);

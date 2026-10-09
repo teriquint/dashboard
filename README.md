@@ -21,6 +21,10 @@ A personal data dashboard created for Project 3 in WRIT 40363. The dashboard loa
 - Includes light and dark themes
 - Saves the user's theme preference so it remains after the page is refreshed
 - Adjusts to different screen sizes
+- Displays random daily quotes loaded from a JSON file
+- Includes a New Quote button
+- Shows loading messages and error messages if data cannot load
+- Includes keyboard focus styling and reduced-motion support
 
 ## Notes
 
